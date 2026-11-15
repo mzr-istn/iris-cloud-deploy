@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="id">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Klasifikasi Spesimen Iris</title>
+<style>
+body{font:1rem system-ui,sans-serif;background:#edf7f3;color:#19382f;margin:0}
+main{max-width:40rem;margin:3rem auto;padding:1.5rem;background:white;border-radius:1rem}
+form{display:grid;gap:0.8rem}label{display:grid;gap:.3rem}
+input,button{font:inherit;padding:.6rem;border:1px solid #74968a;border-radius:.4rem}
+button{background:#23614c;color:white;cursor:pointer} output{display:block;margin:1rem 0;font-weight:700}
+</style>
+<main>
+<h1>Klasifikasi Spesimen Iris</h1>
+<p>Demo Minggu 9 · KNN dengan K = 7</p>
+<form id="pengukuran">
+<label>Panjang sepal (cm)<input required type="number" min=".01" max="20" step="any" value="5.1"></label>
+<label>Lebar sepal (cm)<input required type="number" min=".01" max="20" step="any" value="3.5"></label>
+<label>Panjang petal (cm)<input required type="number" min=".01" max="20" step="any" value="1.4"></label>
+<label>Lebar petal (cm)<input required type="number" min=".01" max="20" step="any" value=".2"></label>
+<button disabled>Prediksi</button>
+</form>
+<output id="hasil" aria-live="polite">Memuat model…</output>
+<p>Demo pendidikan. Prediksi perlu diperiksa sebelum digunakan untuk pencatatan.</p>
+</main>
+<script type="module">
+import { prediksi } from "./knn.mjs";
+const form = document.querySelector("#pengukuran");
+const hasil = document.querySelector("#hasil");
+try {
+  const response = await fetch("./iris_model.json");
+  if (!response.ok) throw new Error("Model belum dapat dimuat.");
+  const model = await response.json();
+  form.querySelector("button").disabled = false;
+  hasil.textContent = "Model siap.";
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    try {
+      const nilai = Array.from(form.querySelectorAll("input"), el => el.valueAsNumber);
+      hasil.textContent = "Prediksi spesies: " + model.classes[prediksi(model, nilai)];
+    } catch (error) {
+      hasil.textContent = error.message;
+    }
+  });
+} catch (error) {
+  hasil.textContent = "Gagal memuat model. Periksa apakah semua berkas telah diunggah.";
+}
+</script>
+</html>
