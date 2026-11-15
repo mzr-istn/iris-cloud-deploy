@@ -49,7 +49,7 @@ Repositori ini berisi satu paket proyek lengkap untuk menjalankan dan men-*deplo
 
 ---
 
-## 2. Deployment ke Render (REST API Gratis)
+## 2. Deployment ke Render (REST API)
 
 1. Unggah seluruh file ini ke repositori **GitHub** Anda.
 2. Masuk ke [render.com](https://render.com) -> **New +** -> **Web Service** -> hubungkan repositori GitHub Anda.
@@ -62,7 +62,7 @@ Repositori ini berisi satu paket proyek lengkap untuk menjalankan dan men-*deplo
 
 ---
 
-## 3. Deployment ke Streamlit Community Cloud (Gratis)
+## 3. Deployment ke Streamlit Community Cloud
 
 1. Gunakan repositori **GitHub** yang sama.
 2. Masuk ke [share.streamlit.io](https://share.streamlit.io) menggunakan akun GitHub.
@@ -72,7 +72,7 @@ Repositori ini berisi satu paket proyek lengkap untuk menjalankan dan men-*deplo
 
 ---
 
-## 4. Deployment ke Hugging Face Spaces (Gratis)
+## 4. Deployment ke Hugging Face Spaces
 
 File `README.md` ini sudah dilengkapi konfigurasi header YAML untuk Hugging Face Spaces (`sdk: gradio`, `app_file: app.py`).
 
